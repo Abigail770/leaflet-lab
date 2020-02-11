@@ -1,0 +1,69 @@
+/* Stylesheet by Abigail Gleason, 2020 */
+
+h1{
+    background-color: #de2d26;
+    margin: auto;
+    font-family: sans-serif;
+    
+}
+
+#mapid {
+    height: 650px;
+    width: 100%;
+    display: inline-block;
+}
+
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}
+
+.sequence-control-container {
+    width: 350px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+}
+
+#panel {
+    width: 26%;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    line-height: 42px;
+}
+
+#search-icon{
+    position:topleft;
+}
+.range-slider {
+    width: 50%;
+}
+
+#forward {
+    float: right;
+}
+
+#reverse {
+    float: left;
+}
+
+.legend-control-container{
+    background-color: rgba(255,255,255,0.8);
+    padding: 5px;
+    line-height: 45px;
+    text-align: center;
+    border: solid gray 1px;
+    font-family: sans-serif;
+}
+
+.leaflet-control-search .search-button {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+}
