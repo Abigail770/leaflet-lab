@@ -10,34 +10,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ'
 }).addTo(mymap);
 
-//Step 3: Add circle markers for point features to the map
-function createPropSymbols(data, map){
-    //create marker options
-    var attribute = "2018";
-    var geojsonMarkerOptions = {
-        radius: 2,
-        fillColor: "#ff7800",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
-
-    //create a Leaflet GeoJSON layer and add it to the map
-    L.geoJson(data, {
-        pointToLayer: function (feature, latlng) {
-            //Step 5: For each feature, determine its value for the selected attribute
-            var attValue = Number(feature.properties[attribute]);
-
-            //Step 6: Give each feature's circle marker a radius based on its attribute value
-            geojsonMarkerOptions.radius = calcPropRadius(attValue);
-            
-            //create circle markers
-            return L.circleMarker(latlng, geojsonMarkerOptions);
-        }
-    }).addTo(mymap);
-};
-
 //calculate the radius of each proportional symbol
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
@@ -73,7 +45,7 @@ function pointToLayer(feature, latlng, attributes){
 
     //create marker options
     var options = {
-        fillColor: "#de2d26",
+        fillColor: "#99d8c9",
         color: "#000",
         weight: 1,
         opacity: 1,
@@ -200,11 +172,11 @@ function createLegend(map, attributes){
             // create the control container with a particular class name
             var container = L.DomUtil.create('div', 'legend-control-container');
 
-            //PUT YOUR SCRIPT TO CREATE THE TEMPORAL LEGEND HERE
+            // create temporal legend
              $(container).append('<div id="temporal-legend">')
 
             //Step 1: start attribute legend svg string
-            var svg = '<svg id="attribute-legend" width="160px" height="60px">';
+            var svg = '<svg id="attribute-legend" width="200px" height="90px">';
 
             //array of circle names to base loop on
             var circles = {
@@ -216,10 +188,10 @@ function createLegend(map, attributes){
         //loop to add each circle and text to svg string
         for (var circle in circles){
             //circle string
-            svg += '<circle class="legend-circle" id="' + circle + '" fill="#de2d26" fill-opacity="0.8" stroke="#000000" cx="50"/>';
+            svg += '<circle class="legend-circle" id="' + circle + '" fill="#99d8c9" fill-opacity="0.8" stroke="#000000" cx="45"/>';
 
             //text string
-            svg += '<text id="' + circle + '-text" x="65" y="' + circles[circle] + '"></text>';
+            svg += '<text id="' + circle + '-text" x="95" y="' + circles[circle] + '"></text>';
         };
             //close svg string
             svg += "</svg>";
@@ -288,7 +260,7 @@ function updateLegend(map, attribute){
 
         //Step 3: assign the cy and r attributes
         $('#'+key).attr({
-            cy: 59 - radius,
+            cy: 85 - radius,
             r: radius
             
          });
@@ -337,20 +309,32 @@ function processData(data){
     return attributes;
 };
 
-function addSearchControl(map){
+//add search control
+function addSearchControl(map, data){
     
-    var searchLayer = L.geoJson().addTo(map);
+    var searchLayer = L.geoJson(data, {
+        onEachFeature: function(feature, marker) {
+            marker.bindPopup(feature.properties.City);
+        }
+    })
+    
     //... adding data in searchLayer ...
     L.map('map', { searchControl: {layer: searchLayer} });
     
-    //map.addControl(controlSearch); // add it to the map
+    var searchControl = new L.control.search({
+        layer: searchLayer,
+        initial: false,
+        propertyName: 'City', // Specify which property is searched into.
+       
+    })
     
-    //add search icon
-    $('#search-icon').html('<img src="img/search-icon.png">');
-
-	map.addControl( new searchLayer({
-		layer: layer.properties.City
-	}) );
+    .addTo(map);
+    
+    searchControl.on('search:locationfound', function(event) {
+        event.layer.openPopup();
+    });
+    
+    map.removeLayer(searchLayer);
 }
 
 //Import GeoJSON data
@@ -362,10 +346,11 @@ function getData(map){
             //create an attributes array
             var attributes = processData(response);
             
+            //call functions to create map items
             createPropSymbols(response, map, attributes);
             createSequenceControls(map, attributes);
             createLegend(map, attributes);
-            addSearchControl(map);
+            addSearchControl(map, response);
         }
     });
 };

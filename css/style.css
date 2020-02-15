@@ -1,14 +1,14 @@
 /* Stylesheet by Abigail Gleason, 2020 */
 
 h1{
-    background-color: #de2d26;
+    background-color: #99d8c9;
     margin: auto;
     font-family: sans-serif;
     
 }
 
 #mapid {
-    height: 650px;
+    height: 680px;
     width: 100%;
     display: inline-block;
 }
@@ -25,15 +25,6 @@ h1{
     line-height: 45px;
     text-align: center;
     border: solid gray 1px;
-}
-
-#panel {
-    width: 26%;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    line-height: 42px;
 }
 
 #search-icon{
@@ -54,13 +45,14 @@ h1{
 .legend-control-container{
     background-color: rgba(255,255,255,0.8);
     padding: 5px;
-    line-height: 45px;
+    line-height: 30px;
+    width: 200px;
     text-align: center;
     border: solid gray 1px;
     font-family: sans-serif;
 }
 
-.leaflet-control-search .search-button {
+#search-button {
     display: block;
     float: left;
     width: 30px;
