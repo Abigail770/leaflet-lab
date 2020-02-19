@@ -90,11 +90,34 @@ function pointToLayer(feature, latlng, attributes){
 //Add circle markers for point features to the map
 function createPropSymbols(data, map, attributes){
     //create a Leaflet GeoJSON layer and add it to the map
-    L.geoJson(data, {
+    var searchLayer = L.geoJson(data, {
         pointToLayer: function(feature, latlng){
             return pointToLayer(feature, latlng, attributes);
         }
-    }).addTo(map);
+    });//.addTo(map);
+    
+//    var searchLayer = L.geoJson(data, {
+//        onEachFeature: function(feature, marker) {
+//            marker.bindPopup(feature.properties.City);
+//        }
+//    })
+    
+    //... adding data in searchLayer ...
+    L.map('map', { searchControl: {layer: searchLayer} });
+    
+    var searchControl = new L.control.search({
+        layer: searchLayer,
+        initial: false,
+        propertyName: 'City', // Specify which property is searched into.
+       
+    })
+    
+    .addTo(map);
+    
+    searchControl.on('search:locationfound', function(event) {
+        event.layer.openPopup();
+    });
+    
 };
 
 //Step 1: Create new sequence controls
@@ -310,32 +333,32 @@ function processData(data){
 };
 
 //add search control
-function addSearchControl(map, data){
-    
-    var searchLayer = L.geoJson(data, {
-        onEachFeature: function(feature, marker) {
-            marker.bindPopup(feature.properties.City);
-        }
-    })
-    
-    //... adding data in searchLayer ...
-    L.map('map', { searchControl: {layer: searchLayer} });
-    
-    var searchControl = new L.control.search({
-        layer: searchLayer,
-        initial: false,
-        propertyName: 'City', // Specify which property is searched into.
-       
-    })
-    
-    .addTo(map);
-    
-    searchControl.on('search:locationfound', function(event) {
-        event.layer.openPopup();
-    });
-    
-    map.removeLayer(searchLayer);
-}
+//function addSearchControl(map, data){
+//
+//    var searchLayer = L.geoJson(data, {
+//        onEachFeature: function(feature, marker) {
+//            marker.bindPopup(feature.properties.City);
+//        }
+//    })
+//    
+//    //... adding data in searchLayer ...
+//    L.map('map', { searchControl: {layer: searchLayer} });
+//    
+//    var searchControl = new L.control.search({
+//        layer: searchLayer,
+//        initial: false,
+//        propertyName: 'City', // Specify which property is searched into.
+//       
+//    })
+//    
+//    .addTo(map);
+//    
+//    searchControl.on('search:locationfound', function(event) {
+//        event.layer.openPopup();
+//    });
+//    
+//    //map.removeLayer(searchLayer);
+//}
 
 //Import GeoJSON data
 function getData(map){
@@ -350,7 +373,6 @@ function getData(map){
             createPropSymbols(response, map, attributes);
             createSequenceControls(map, attributes);
             createLegend(map, attributes);
-            addSearchControl(map, response);
         }
     });
 };
