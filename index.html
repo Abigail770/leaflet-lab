@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width">
 		<title></title>
 
-		<!--put your external stylesheet links here-->
+		<!--external stylesheet links-->
 		<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
 			integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -14,25 +14,49 @@
 			integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
 			crossorigin=""></script>
         <link rel="stylesheet" href="css/leaflet-search.src.css">
-		<!--[if IE<9]>
-			<link rel="stylesheet" href="css/style.ie.css">
-		<![endif]-->
         <link rel="stylesheet" href="css/style.css">
-
 	</head>
 
 	<body>
-		<!--put your initial page content here-->
-        <h1>Cost of Living Index in Major U.S. Cities</h1>
-        <p> The Cost of Living Index is used to compare living costs between cities or regions.  Housing, food, transportation, healthcare, and other essential expenses are taken into account when calculating the index value.</p>
-        <p>The map below compares Cost of Living Index between 15 major U.S. cities from 2012-2018.  To use the map's interactive features, click the "skip" and "reverse" buttons or drag the slider bar to view temporal changes.</p>
-		<div id="mapid"></div>
+        <h1>The Cost of Living, Quantified</h1>
+		<!--page content-->
+		<div id="mapid">
+            <div id="webpage-text">
+                <p>To use the map's interactive features, click the "skip" and "reverse" buttons or drag the slider bar to view temporal changes.</p>
+            </div>
+        </div>
         <div id="panel"></div>
         <div id="map"></div>
-		<!--you can also use this space for internal scripts or stylesheets;
-		place these within <script> or <style> tags-->
-
-		<!--put your external script links here-->
+        <div id="textbody">
+            <p>The Cost of Living Index is used to compare living costs between cities or regions.  Housing, food, transportation, healthcare, and other essential expenses are taken into account when calculating the index value.</p>
+            <p>Use the map to explore the Cost of Living Index between 15 major U.S. cities from 2012-2018.</p>
+        </div>
+        <div id="dropdowns">
+            <button class="accordion">How Does it Work?</button>
+                <div class="panel">
+                  <p>The Cost of Living Index is for this dataset is relative to New York City, which is set at 100.  Cities are then compared to this index.  For example, in 2018 the COLI for Columbus, Ohio was 69.13, meaning it was over 30% below the New York City's average.</p>
+                </div>
+                <br/>
+            <button class="accordion">Why The Difference?</button>
+                <div class="panel">
+                  <p>Increases in Cost of Living Index over time can be seen in some cities, while others stagnate or decline.  This could be caused by a variety of factors, including location and wealth.  Cities near water bodies tend to be more expensive, as can be remote cities that are more diffcult to access and therefore to supply.</p>
+                </div>
+                <br/>
+            <button class="accordion">More About COLI</button>
+                <div class="panel">
+                    <p>To learn more about the COLI please visit:</p>
+                    <ul>
+                        <li><a href="http://coli.org/" target = _blank>C2ER</a></li>
+                        <li><a href="https://www.numbeo.com/" target = _blank>Numbeo</a></li>
+                    </ul>
+                </div>
+            
+        </div>
+        <div id="sources">
+            <p>Sources: Numbeo.com, Icons by Travis Avery from The Noun Project, Coli.org, Stefano Cudini for Leaflet Search Control, The Kiplinger Washington Editors</p>
+        </div>
+        
+		<!--external script links-->
         <script type="text/javascript" src="lib/jquery-3.4.1.js"></script>
 		<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
         <script type="text/javascript" src="lib/leaflet-search.src.js"></script>

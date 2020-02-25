@@ -1,15 +1,92 @@
 /* Stylesheet by Abigail Gleason, 2020 */
+body{
+    background-color: black;
+}
 
 h1{
-    background-color: #99d8c9;
+    z-index: 999;
+    left: 50%;
     margin: auto;
-    font-family: sans-serif;
-    
+    font: 35pt bold trebuchet ms, sans-serif;
+    color: white;
+    padding: 5px;
+}
+
+#webpage-text{
+    font: 10pt trebuchet ms, sans-serif;
+    position:relative;
+    z-index: 999;
+    width: 15%;
+    top: 450px;
+    left: 10px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 10px 10px; 
+    padding: 10px;
+}
+
+#textbody{
+    color: white;
+    font: 12pt trebuchet ms, sans-serif;
+    width: 18%;
+    position: absolute;
+    top: 65px;
+}
+
+#dropdowns{
+    color: white;
+    position: absolute;
+    top: 350px;
+}
+
+.accordion {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  width: 200px;
+  text-align: left;
+  font: 10pt trebuchet ms, sans-serif;
+}
+
+.active, .accordion:hover {
+  background-color: green;
+}
+
+.panel {
+  padding: 0 18px;
+  display: block;
+  width: 164px;
+  font: 10pt trebuchet ms, sans-serif;
+  max-height:0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 10px;
+  color: lightgrey;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+#sources{
+    color: white;
+    font: 8pt trebuchet ms, sans-serif;
+    width: 100%;
+    position: relative;
+    top: 10px;
 }
 
 #mapid {
-    height: 680px;
-    width: 100%;
+    height: 700px;
+    width: 80%;
+    left: 20%;
+    top: 20px;
     display: inline-block;
 }
 
@@ -18,20 +95,39 @@ h1{
 }
 
 .sequence-control-container {
-    width: 350px;
+    width: 300px;
     height: 30px;
     background-color: rgba(255,255,255,0.8);
     padding: 10px;
     line-height: 45px;
     text-align: center;
-    border: solid gray 1px;
+    border-radius: 10px 10px;
 }
 
-#search-icon{
-    position:topleft;
-}
 .range-slider {
-    width: 50%;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 60%;
+    border-radius: 5px;
+    background-color: lightsteelblue
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: green;
+  cursor: pointer;
+}
+
+.range-slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
 }
 
 #forward {
@@ -42,23 +138,22 @@ h1{
     float: left;
 }
 
+.skip{
+    background-color: green;
+    border:none;
+    border-radius: 20%;
+}
+
 .legend-control-container{
     background-color: rgba(255,255,255,0.8);
     padding: 5px;
     line-height: 30px;
     width: 200px;
     text-align: center;
-    border: solid gray 1px;
-    font-family: sans-serif;
+    border: 2px rgba(255,255,255,0.8);
+    border-radius: 10px 10px;
 }
 
-#search-button {
-    display: block;
-    float: left;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-}
 .leaflet-marker-icon.leaflet-interactive,
 .leaflet-image-layer.leaflet-interactive,
 .leaflet-pane > svg path.leaflet-interactive,

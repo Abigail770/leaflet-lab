@@ -10,6 +10,41 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ'
 }).addTo(mymap);
 
+var webpageText = "To use the map's interactive features, click the 'skip' and 'reverse' buttons or drag the slider bar to view temporal changes.";
+
+//hide text with zoom
+mymap.on('zoomend', function() {
+    var zoomLevel = mymap.getZoom()
+    hideTextOnZoom(zoomLevel, webpageText);
+}) 
+
+function hideTextOnZoom (zoomLevel, webpageText){
+    if (zoomLevel > 4){
+        $("#webpage-text").html("");
+        $("#webpage-text").css("padding", "0px");
+    }
+    else{
+        $("#webpage-text").html(webpageText);
+        $("#webpage-text").css("padding", "10px");
+    }
+}
+
+//collapsible content
+var accordion = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < accordion.length; i++) {
+  accordion[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+
 //calculate the radius of each proportional symbol
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
@@ -45,7 +80,7 @@ function pointToLayer(feature, latlng, attributes){
 
     //create marker options
     var options = {
-        fillColor: "#99d8c9",
+        fillColor: "black",
         color: "#000",
         weight: 1,
         opacity: 1,
@@ -94,13 +129,7 @@ function createPropSymbols(data, map, attributes){
         pointToLayer: function(feature, latlng){
             return pointToLayer(feature, latlng, attributes);
         }
-    });//.addTo(map);
-    
-//    var searchLayer = L.geoJson(data, {
-//        onEachFeature: function(feature, marker) {
-//            marker.bindPopup(feature.properties.City);
-//        }
-//    })
+    });
     
     //... adding data in searchLayer ...
     L.map('map', { searchControl: {layer: searchLayer} });
@@ -136,8 +165,10 @@ function createSequenceControls(map, attributes){
             $(container).append('<input class="range-slider" type="range">');
             
              //add skip buttons
-            $(container).append('<button class="skip" id="reverse" title="Reverse">Reverse</button>');
-            $(container).append('<button class="skip" id="forward" title="Forward">Skip</button>');
+            $("#panel").append('<button class="skip" id="reverse"></button>');
+            $("#panel").append('<button class="skip" id="forward"></button>');
+            $(container).append($('#reverse').html('<img src="/images/reverse.png">'));
+            $(container).append($('#forward').html('<img src="/images/forward.png">'));
             
             //kill any mouse event listeners on the map
             $(container).on('mousedown dblclick', function(e){
@@ -211,7 +242,7 @@ function createLegend(map, attributes){
         //loop to add each circle and text to svg string
         for (var circle in circles){
             //circle string
-            svg += '<circle class="legend-circle" id="' + circle + '" fill="#99d8c9" fill-opacity="0.8" stroke="#000000" cx="45"/>';
+            svg += '<circle class="legend-circle" id="' + circle + '" fill="black" fill-opacity="0.8" stroke="green" cx="45"/>';
 
             //text string
             svg += '<text id="' + circle + '-text" x="95" y="' + circles[circle] + '"></text>';
@@ -332,34 +363,6 @@ function processData(data){
     return attributes;
 };
 
-//add search control
-//function addSearchControl(map, data){
-//
-//    var searchLayer = L.geoJson(data, {
-//        onEachFeature: function(feature, marker) {
-//            marker.bindPopup(feature.properties.City);
-//        }
-//    })
-//    
-//    //... adding data in searchLayer ...
-//    L.map('map', { searchControl: {layer: searchLayer} });
-//    
-//    var searchControl = new L.control.search({
-//        layer: searchLayer,
-//        initial: false,
-//        propertyName: 'City', // Specify which property is searched into.
-//       
-//    })
-//    
-//    .addTo(map);
-//    
-//    searchControl.on('search:locationfound', function(event) {
-//        event.layer.openPopup();
-//    });
-//    
-//    //map.removeLayer(searchLayer);
-//}
-
 //Import GeoJSON data
 function getData(map){
     //load the data
@@ -378,4 +381,3 @@ function getData(map){
 };
 
 getData(mymap);
-//call the initialize function when the document has loaded
