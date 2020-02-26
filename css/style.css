@@ -9,7 +9,6 @@ h1{
     margin: auto;
     font: 35pt bold trebuchet ms, sans-serif;
     color: white;
-    padding: 5px;
 }
 
 #webpage-text{
@@ -17,7 +16,7 @@ h1{
     position:relative;
     z-index: 999;
     width: 15%;
-    top: 450px;
+    top: 400px;
     left: 10px;
     background-color: rgba(255,255,255,0.8);
     border-radius: 10px 10px; 
@@ -83,10 +82,10 @@ h1{
 }
 
 #mapid {
-    height: 700px;
+    height: 625px;
     width: 80%;
     left: 20%;
-    top: 20px;
+    top: 10px;
     display: inline-block;
 }
 
@@ -152,6 +151,11 @@ h1{
     text-align: center;
     border: 2px rgba(255,255,255,0.8);
     border-radius: 10px 10px;
+    font: 10pt trebuchet ms, sans-serif;
+}
+
+#temporal-legend{
+    font: 12pt trebuchet ms, sans-serif;
 }
 
 .leaflet-marker-icon.leaflet-interactive,

@@ -57,6 +57,7 @@ function calcPropRadius(attValue) {
     return radius;
 };
 
+//create popup
 function Popup(properties, attribute, layer, radius){
     this.properties = properties;
     this.attribute = attribute;
@@ -74,9 +75,8 @@ function Popup(properties, attribute, layer, radius){
 
 //function to convert markers to circle markers
 function pointToLayer(feature, latlng, attributes){
-    //Step 4: Assign the current attribute based on the first index of the attributes array
+
     var attribute = attributes[0];
-    //check
 
     //create marker options
     var options = {
@@ -124,6 +124,7 @@ function pointToLayer(feature, latlng, attributes){
 
 //Add circle markers for point features to the map
 function createPropSymbols(data, map, attributes){
+    
     //create a Leaflet GeoJSON layer and add it to the map
     var searchLayer = L.geoJson(data, {
         pointToLayer: function(feature, latlng){
@@ -149,7 +150,7 @@ function createPropSymbols(data, map, attributes){
     
 };
 
-//Step 1: Create new sequence controls
+//Create new sequence controls
 function createSequenceControls(map, attributes){
     var SequenceControl = L.Control.extend({
         options: {
@@ -157,18 +158,18 @@ function createSequenceControls(map, attributes){
         },
 
         onAdd: function (map) {
+            
             // create the control container div with a particular class name
             var container = L.DomUtil.create('div', 'sequence-control-container');
 
-            // ... initialize other DOM elements, add listeners, etc.
             //create range input element (slider)
             $(container).append('<input class="range-slider" type="range">');
             
              //add skip buttons
             $("#panel").append('<button class="skip" id="reverse"></button>');
             $("#panel").append('<button class="skip" id="forward"></button>');
-            $(container).append($('#reverse').html('<img src="/images/reverse.png">'));
-            $(container).append($('#forward').html('<img src="/images/forward.png">'));
+            $(container).append($('#reverse').html('<img src="images/reverse.png">'));
+            $(container).append($('#forward').html('<img src="images/forward.png">'));
             
             //kill any mouse event listeners on the map
             $(container).on('mousedown dblclick', function(e){
@@ -188,23 +189,23 @@ function createSequenceControls(map, attributes){
         step: 1
     });
     
-    //Step 5: click listener for buttons
+    //click listener for buttons
     $('.skip').click(function(){
         //sequence
         var index = $('.range-slider').val();
 
-        //Step 6: increment or decrement depending on button clicked
+        //increment or decrement depending on button clicked
         if ($(this).attr('id') == 'forward'){
             index++;
-            //Step 7: if past the last attribute, wrap around to first attribute
+            //if past the last attribute, wrap around to first attribute
             index = index > 6 ? 0 : index;
         } else if ($(this).attr('id') == 'reverse'){
             index--;
-            //Step 7: if past the first attribute, wrap around to last attribute
+            //if past the first attribute, wrap around to last attribute
             index = index < 0 ? 6 : index;
         };
 
-        //Step 8: update slider
+        //update slider
         $('.range-slider').val(index);
         updatePropSymbols(map, attributes[index]);
         });
@@ -229,7 +230,7 @@ function createLegend(map, attributes){
             // create temporal legend
              $(container).append('<div id="temporal-legend">')
 
-            //Step 1: start attribute legend svg string
+            //start attribute legend svg string
             var svg = '<svg id="attribute-legend" width="200px" height="90px">';
 
             //array of circle names to base loop on
@@ -312,13 +313,13 @@ function updateLegend(map, attribute){
         //get the radius
         var radius = calcPropRadius(circleValues[key]);
 
-        //Step 3: assign the cy and r attributes
+        //assign the cy and r attributes
         $('#'+key).attr({
             cy: 85 - radius,
             r: radius
             
          });
-        //Step 4: add legend text
+        //add legend text
         $('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " COL index");
     };
 };
