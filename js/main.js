@@ -1,14 +1,19 @@
 /* Script by Abigail Gleason, 2020 */
 //leaflet tutorial
-var mymap = L.map('mapid').setView([39.8283, -98.5795], 4);
+var mymap = L.map('mapid',{
+    maxZoom: 18,
+}).setView([39.8283, -98.5795], 4);
 
 //mapbox tile layer
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    accessToken: 'pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ'
-}).addTo(mymap);
+//L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ', {
+//    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//    maxZoom: 18,
+//    id: 'mapbox/streets-v11',
+//    accessToken: 'pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ'
+//}).addTo(mymap);
+
+L.esri.basemapLayer('DarkGray').addTo(mymap);
+L.esri.basemapLayer('DarkGrayLabels').addTo(mymap);
 
 var webpageText = "To use the map's interactive features, click the 'skip' and 'reverse' buttons or drag the slider bar to view temporal changes.";
 
@@ -48,9 +53,9 @@ for (i = 0; i < accordion.length; i++) {
 //calculate the radius of each proportional symbol
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
-    var scaleFactor = 50;
+    var scaleFactor = 30;
     //area based on attribute value and scale factor
-    var area = attValue * scaleFactor;
+    var area = attValue *scaleFactor;
     //radius calculated based on area
     var radius = Math.sqrt(area/Math.PI);
 

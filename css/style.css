@@ -8,7 +8,7 @@ h1{
     left: 50%;
     margin: auto;
     font: 35pt bold trebuchet ms, sans-serif;
-    color: white;
+    color: darkgray;
 }
 
 #webpage-text{
@@ -18,13 +18,13 @@ h1{
     width: 15%;
     top: 400px;
     left: 10px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: lightgray;
     border-radius: 10px 10px; 
     padding: 10px;
 }
 
 #textbody{
-    color: white;
+    color: darkgray;
     font: 12pt trebuchet ms, sans-serif;
     width: 18%;
     position: absolute;
@@ -32,14 +32,14 @@ h1{
 }
 
 #dropdowns{
-    color: white;
+    color: darkgray;
     position: absolute;
     top: 350px;
 }
 
 .accordion {
   background-color: black;
-  color: white;
+  color: darkgray;
   cursor: pointer;
   padding: 5px;
   width: 200px;
@@ -74,7 +74,7 @@ h1{
 }
 
 #sources{
-    color: white;
+    color: darkgray;
     font: 8pt trebuchet ms, sans-serif;
     width: 100%;
     position: relative;
@@ -93,10 +93,14 @@ h1{
     margin: 0.2em 0;
 }
 
+#panel{
+    background-color: lightgray;
+}
+
 .sequence-control-container {
     width: 300px;
     height: 30px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: lightgray;
     padding: 10px;
     line-height: 45px;
     text-align: center;
@@ -144,7 +148,7 @@ h1{
 }
 
 .legend-control-container{
-    background-color: rgba(255,255,255,0.8);
+    background-color: lightgray;
     padding: 5px;
     line-height: 30px;
     width: 200px;
