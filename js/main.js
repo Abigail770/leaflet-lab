@@ -53,7 +53,7 @@ for (i = 0; i < accordion.length; i++) {
 //calculate the radius of each proportional symbol
 function calcPropRadius(attValue) {
     //scale factor to adjust symbol size evenly
-    var scaleFactor = 30;
+    var scaleFactor = (attValue) * 0.3;
     //area based on attribute value and scale factor
     var area = attValue *scaleFactor;
     //radius calculated based on area
@@ -236,7 +236,7 @@ function createLegend(map, attributes){
              $(container).append('<div id="temporal-legend">')
 
             //start attribute legend svg string
-            var svg = '<svg id="attribute-legend" width="200px" height="90px">';
+            var svg = '<svg id="attribute-legend" width="200px" height="85px">';
 
             //array of circle names to base loop on
             var circles = {
@@ -248,10 +248,10 @@ function createLegend(map, attributes){
         //loop to add each circle and text to svg string
         for (var circle in circles){
             //circle string
-            svg += '<circle class="legend-circle" id="' + circle + '" fill="black" fill-opacity="0.8" stroke="green" cx="45"/>';
+            svg += '<circle class="legend-circle" id="' + circle + '" fill="black" fill-opacity="15" stroke="cadetblue" cx="40"/>';
 
             //text string
-            svg += '<text id="' + circle + '-text" x="95" y="' + circles[circle] + '"></text>';
+            svg += '<text id="' + circle + '-text" x="85" y="' + circles[circle] + '"></text>';
         };
             //close svg string
             svg += "</svg>";
