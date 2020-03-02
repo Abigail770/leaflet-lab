@@ -4,14 +4,6 @@ var mymap = L.map('mapid',{
     maxZoom: 18,
 }).setView([39.8283, -98.5795], 4);
 
-//mapbox tile layer
-//L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ', {
-//    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//    maxZoom: 18,
-//    id: 'mapbox/streets-v11',
-//    accessToken: 'pk.eyJ1IjoiYWJpZ2FpbDc3MCIsImEiOiJjazYyZDFqa24wZDl1M2tyd3NnMTdnZjQyIn0.XC5wZaakqpSNfHIJjW8vCQ'
-//}).addTo(mymap);
-
 L.esri.basemapLayer('DarkGray').addTo(mymap);
 L.esri.basemapLayer('DarkGrayLabels').addTo(mymap);
 
